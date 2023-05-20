@@ -61,9 +61,23 @@ async function run() {
 
 
     // added toys
+
+    app.get('/added',async(req,res)=>{
+        console.log(req.query.sellerEmail)
+        let query ={};
+        if (req.query?.sellerEmail){
+            query ={email:req.query.sellerEmail}
+        }
+        const result =await addedCollection.find().toArray();
+        res.send(result);
+
+    });
+
     app.post('/added',async(req,res)=>{
         const add =req.body;
         console.log(add);
+        const result =await addedCollection.insertOne(add);
+        res.send(result);
 
     });
 
