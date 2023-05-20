@@ -25,6 +25,9 @@ async function run() {
   try {
     await client.connect();
     const serviceCollection = client.db('ToyZone').collection('services');
+    const addedCollection =client.db('ToyZone').collection('added');
+
+
 
     app.get('/services', async(req, res)=>{
         const cursor = serviceCollection.find();
@@ -34,7 +37,7 @@ async function run() {
     })
 
     
-    // Route to get the details of a single toy by toycode
+ 
     app.get('/services/:id', async (req, res) => {
       const id = req.params.id;
       
@@ -55,6 +58,15 @@ async function run() {
         res.status(500).send('Internal Server Error');
       }
     });
+
+
+    // added toys
+    app.post('/added',async(req,res)=>{
+        const add =req.body;
+        console.log(add);
+
+    });
+
 
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
