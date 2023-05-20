@@ -80,6 +80,22 @@ async function run() {
         res.send(result);
 
     });
+
+    app.patch('/added/:id',async(req,res)=>{
+        const id = req.params.id;
+        const filter ={_id: new ObjectId(id)};
+        const updateAdded = req.body;
+        const updateDoc ={
+            $set:{
+                status:updateAdded.status
+            },
+        };
+        const result =await addedCollection.updateOne(filter,updateDoc);
+        res.send(result);
+
+
+    });
+
     app.delete('/added/:id',async(req,res)=>{
         const id =req.params.id;
         const query ={_id: new ObjectId(id)}
