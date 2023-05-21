@@ -72,6 +72,12 @@ async function run() {
         res.send(result);
 
     });
+    // app.get('/added',async(req,res)=>{
+    //     const cursor =addedCollection.find();
+    //     const result =await cursor.toArray();
+    //     res.send(result);
+
+    // });
 
     app.post('/added',async(req,res)=>{
         const add =req.body;
