@@ -72,12 +72,17 @@ async function run() {
         res.send(result);
 
     });
-    // app.get('/added',async(req,res)=>{
-    //     const cursor =addedCollection.find();
-    //     const result =await cursor.toArray();
-    //     res.send(result);
+    app.get('/added/:id',async(req,res)=>{
+        const id =req.params.id;
+        const query ={_id: new ObjectId(id)};
 
-    // });
+        const options ={
+            projection:{pictureUrl:1,name:1,subCategory:1,price:1,rating:1,description:1}
+        }
+        const result =await addedCollection.findOne(query);
+        res.send(result);
+
+    });
 
     app.post('/added',async(req,res)=>{
         const add =req.body;
